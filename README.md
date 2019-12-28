@@ -73,7 +73,8 @@ MovieSubtitle_Dataset
         └── masks
 ```
 mask images and capture images would have similar image names.  
-Feeding in these inpus to Free Form Inpainting GAN and analysing the experiment results may be the remaining effort.  
+The remaining work includs feeding these created new inputs into Free Form Inpainting GAN, analysing the experiment results and study the methods of scenes detection and text detection.  
+
   
 **Arguments for VideoCapture.py**
 ```
