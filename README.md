@@ -10,7 +10,13 @@ The purpose of this project is to remove the subtitles of input video.
 
 - Finally, we use Free Form Video Inpainting proposed by [Free-form Video Inpainting with 3D Gated Convolution and Temporal PatchGAN. Chang et al. ICCV 2019.](https://github.com/amjltc295/Free-Form-Video-Inpainting) , which use 3D convolutional filter to consider temporal information near by the specific frame.  
 
+## Environment Requirements  
+
+
 ## Usage
+
+
+
 
 ## Reference
 - [PySceneDetect](https://github.com/Breakthrough/PySceneDetect/)
