@@ -59,7 +59,7 @@ python VideoCapture.py -cls True -is 256 256
 ```
 python VideoCapture.py -i False -cls True -is 256 256
 ```
-then the results captures and masks would be saved in folders videos and folders masks as :  
+then the results captures and masks would be saved in folder videos and folder masks as :  
 ```
 MovieSubtitle_Dataset
 ├── VideoCapture.py
