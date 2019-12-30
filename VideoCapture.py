@@ -545,13 +545,13 @@ if __name__ == "__main__":
             shutil.rmtree("CRAFT-pytorch-master/result", ignore_errors=True)
         del_csv = list()
         for item in os.listdir("PySceneDetect-0.5.1.1"):
-            if item.split(".")[-3:] == "csv":
+            if item.split(".")[-1] == "csv":
                 del_csv.append(item)
         
         for item in del_csv:
-            # os.remove(f"PySceneDetect/{item}")
+            os.remove(f"PySceneDetect-0.5.1.1/{item}")
             print("del", item)
-
+    exit(0)
 
 
     Inference = args.inference
