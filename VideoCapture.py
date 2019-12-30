@@ -541,8 +541,11 @@ if __name__ == "__main__":
     if args.clean_old_files:
         if os.path.exists("MovieDataset"):
             shutil.rmtree("MovieDataset", ignore_errors=True)
+            print("del MovieDataset")
         if os.path.exists("CRAFT-pytorch-master/result"):
             shutil.rmtree("CRAFT-pytorch-master/result", ignore_errors=True)
+            print("del CRAFT-pytorch-master/result")
+            
         del_csv = list()
         for item in os.listdir("PySceneDetect-0.5.1.1"):
             if item.split(".")[-1] == "csv":
@@ -551,14 +554,12 @@ if __name__ == "__main__":
         for item in del_csv:
             os.remove(f"PySceneDetect-0.5.1.1/{item}")
             print("del", item)
-    exit(0)
 
 
     Inference = args.inference
     logger = Create_Logger(logging.INFO)
     # create Subtitle Text File
     subtitle_file_path_dict, movie_list = Check_SRT_File(Inference=Inference)
-    print("here->", subtitle_file_path_dict, movie_list)
     # Parse subtitle text file content
     Process_Movie(args, subtitle_file_path_dict, movie_list, Inference=Inference)
 
