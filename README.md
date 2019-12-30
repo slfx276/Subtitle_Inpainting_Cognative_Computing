@@ -10,7 +10,10 @@ The purpose of this project is to remove the subtitles of input video.
 
 - Finally, we use Free Form Video Inpainting proposed by [Free-form Video Inpainting with 3D Gated Convolution and Temporal PatchGAN. Chang et al. ICCV 2019.](https://github.com/amjltc295/Free-Form-Video-Inpainting) , which use 3D convolutional filter to consider temporal information near by the specific frame.  
 
-#### **PySceneDetec and Text Detection(CRAFT)** can be downloaded [Here](https://drive.google.com/open?id=1ln3P9sjMEAL9o6Aanm46poLW6qPID8yO)  
+## Download
+**1. PySceneDetec and 2. Text Detection(CRAFT)** for videos preprocessing can be downloaded [Here](https://drive.google.com/open?id=1ln3P9sjMEAL9o6Aanm46poLW6qPID8yO)  
+  
+For 3. Free Form Inpainting GAN, you could check their github repository.
 
 ## Environment Requirements  
 detail requirements can be check in website links of these packages.  
@@ -28,12 +31,17 @@ detail requirements can be check in website links of these packages.
     - scipy==1.1.0
 3.  Free Form Inpainting
     - check its requirements.txt  
-    
+## Notification  
+- If the resizing image size is too small, it would affect text detection result.  
+- If your video have **no internal subtitle** instead of only a .srt file, than using inference command is wasting time.  
+Because it won't create any meaningful mask of subtitles, instead of white image and some masks of frames which have text content(not subtitles).  
+- Movie with only black and white color seems not good for our scene detection method.  
+
 ## Usage
 
-initially, your directory in current folder(e.g. MovieSubtitle_Dataset) should be like:  
+initially, your directory in current folder(e.g. temp) should be like:  
 ```
-MovieSubtitle_Dataset
+temp
 ├── VideoCapture.py
 ├── PySceneDetect-0.5.1.1
 └── CRAFT-pytorch-master
@@ -42,7 +50,7 @@ MovieSubtitle_Dataset
 after pull in the movie files you want to test, the directory should be like.  
 
 ```
-MovieSubtitle_Dataset
+temp
 ├── VideoCapture.py
 ├── PySceneDetect-0.5.1.1
 ├── CRAFT-pytorch-master
@@ -64,7 +72,7 @@ python VideoCapture.py -i False -cls True -is 256 256
 ( Note that if the resizing image size is too small, it would affect text detection result. )  
 then the results captures and masks would be saved in folder videos and folder masks as :  
 ```
-MovieSubtitle_Dataset
+temp
 ├── VideoCapture.py
 ├── PySceneDetect-0.5.1.1
 ├── CRAFT-pytorch-master
@@ -78,7 +86,7 @@ MovieSubtitle_Dataset
 mask images and capture images would have similar image names.  
 The remaining work includes feeding these created new inputs into Free Form Inpainting GAN, analysing the experiment results and study the methods of scenes detection and text detection.  
 
-  
+
 **Arguments for VideoCapture.py**
 ```
 usage: Create inputs of Free Form Inpainting Game. [-h] [-i INFERENCE]
