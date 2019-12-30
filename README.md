@@ -11,7 +11,7 @@ The purpose of this project is to remove the subtitles of input video.
 - Finally, we use Free Form Video Inpainting proposed by [Free-form Video Inpainting with 3D Gated Convolution and Temporal PatchGAN. Chang et al. ICCV 2019.](https://github.com/amjltc295/Free-Form-Video-Inpainting) , which use 3D convolutional filter to consider temporal information near by the specific frame.  
 
 ## Download
-**1. PySceneDetec and 2. Text Detection(CRAFT)** for videos preprocessing can be downloaded [Here](https://drive.google.com/open?id=1ln3P9sjMEAL9o6Aanm46poLW6qPID8yO)  
+Video preprocessing testing folder includes **1. PySceneDetec and 2. Text Detection(CRAFT)** packages can be downloaded [Here](https://drive.google.com/open?id=1ln3P9sjMEAL9o6Aanm46poLW6qPID8yO)  
   
 For 3. Free Form Inpainting GAN, you could check their github repository.
 
