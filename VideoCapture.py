@@ -22,8 +22,10 @@ def get_parser():
     Creates a new argument parser.
     """
     parser = argparse.ArgumentParser('Create inputs of Free Form Inpainting Game.')
-    parser.add_argument("-i", "--inference", type=bool, default=True, dest="inference",
+    parser.add_argument("-i", "--inference", action="store_true", dest="inference",
                             help="created data is for inference or training Free Form Inpainting GAN.")
+    parser.add_argument("-cls", "--cleanfile",  action="store_true", dest="clean_old_files", 
+                            help="clean old data before creating new ones")
     parser.add_argument("-is", "--imgsize", type=int, default=(128,128), dest="img_size", nargs='+', 
                             help="image size that you want to resize the video frame size to.")
     parser.add_argument("-sn", "--samplenumber", type=int, default=16, dest="sample_num",
@@ -36,8 +38,6 @@ def get_parser():
                             help="font size in mask images that you created for training Free Form Inpainting GAN.")
     parser.add_argument("-fc", "--fontcolor", type=str, default="black", dest="font_color", 
                             help="font color in mask images that you created for training Free Form Inpainting GAN.")
-    parser.add_argument("-cls", "--cleanfile", type=bool, default=False, dest="clean_old_files", 
-                            help="clean old data before creating new ones")
 
     return parser.parse_args()
 
@@ -516,6 +516,7 @@ def Process_Movie(args, subtitle_file_path_dict, movie_list, Inference = True):
     for movie in movie_list:
         # Start Process a Movie
         movie_files = os.listdir(movie)
+        print("herehereherehereherehereherehereherehereherehereherehereherehere")
         for file_name in movie_files:
             extension = file_name.split(".")[-1].lower()
             # found Movie video file          
@@ -524,8 +525,10 @@ def Process_Movie(args, subtitle_file_path_dict, movie_list, Inference = True):
                     logger.info(f"Process_Movie: ./{movie}/{file_name}")
                     created_folder_list = Inference_Extract_Video_info(args, movie, file_name)
                     Detect_Text(created_folder_list)
+                    print("aaaaaaaaaaaaaaaaaaaaaa")
                 else:
                     Extract_Video_info(args, movie, file_name, subtitle_file_path_dict)
+                    print("zzzzzzzzzzzzzzzzzzzzzzzzzzz")
                     
         # Finish Processing a Movie
         global finished_movie_count 
@@ -558,6 +561,8 @@ if __name__ == "__main__":
 
     Inference = args.inference
     logger = Create_Logger(logging.INFO)
+    logger.info(f"Inference {Inference},.clean File : {args.clean_old_files}")
+    exit(0)
     # create Subtitle Text File
     subtitle_file_path_dict, movie_list = Check_SRT_File(Inference=Inference)
     # Parse subtitle text file content
