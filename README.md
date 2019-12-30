@@ -63,11 +63,11 @@ temp
 
 - **Create captures and reference masks for inpainting inference**
 ```
-python VideoCapture.py -cls True -is 256 256
+python VideoCapture.py --inference --cleanfile -is 256 256
 ```
 - **Create training data for Free Form Inpainting (then movies should have .srt files ! )**
 ```
-python VideoCapture.py -i False -cls True -is 256 256
+python VideoCapture.py --cleanfile -is 256 256
 ```
 ( Note that if the resizing image size is too small, it would affect text detection result. )  
 then the results captures and masks would be saved in folder videos and folder masks as :  
