@@ -31,6 +31,12 @@ detail requirements can be check in website links of these packages.
     - scipy==1.1.0
 3.  Free Form Inpainting
     - check its requirements.txt  
+**all my packages in virtual environment is in environment.yml **
+```
+conda env create -n videoPreprocessing -f environment.yml  
+```
+
+
 ## Notification  
 - If the resizing image size is too small, it would affect text detection result.  
 - If your video have **no internal subtitle** instead of only a .srt file, than using inference command is wasting time.  
