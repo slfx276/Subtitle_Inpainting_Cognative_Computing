@@ -97,20 +97,19 @@ The remaining work includes feeding these created new inputs into Free Form Inpa
 
 **Arguments for VideoCapture.py**
 ```
-usage: Create inputs of Free Form Inpainting Game. [-h] [-i INFERENCE]
+usage: Create inputs of Free Form Inpainting Game. [-h] [-i] [-cls]
                                                    [-is IMG_SIZE [IMG_SIZE ...]]
                                                    [-sn SAMPLE_NUM]
                                                    [-gap FRAME_GAP]
                                                    [-sc SCENE_DETECTION]
                                                    [-fs FONT_SIZE]
                                                    [-fc FONT_COLOR]
-                                                   [-cls CLEAN_OLD_FILES]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -i INFERENCE, --inference INFERENCE
-                        created data is for inference or training Free Form
+  -i, --inference       created data is for inference or training Free Form
                         Inpainting GAN.
+  -cls, --cleanfile     clean old data before creating new ones
   -is IMG_SIZE [IMG_SIZE ...], --imgsize IMG_SIZE [IMG_SIZE ...]
                         image size that you want to resize the video frame
                         size to.
@@ -129,8 +128,6 @@ optional arguments:
   -fc FONT_COLOR, --fontcolor FONT_COLOR
                         font color in mask images that you created for
                         training Free Form Inpainting GAN.
-  -cls CLEAN_OLD_FILES, --cleanfile CLEAN_OLD_FILES
-                        clean old data before creating new ones
 ```
 
 
