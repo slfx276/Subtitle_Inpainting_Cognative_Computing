@@ -363,6 +363,7 @@ def Extract_Video_info(args, movie, video_file, subtitle_file_path_dict):
     
     # Create Capture of Video
 
+    movie_folder_count = 0
     t1 = t.time()
     while rval:
         if count in frame_subtitle_dict.keys() and count < total_frames - (frame_gap * sample_num):
@@ -381,7 +382,8 @@ def Extract_Video_info(args, movie, video_file, subtitle_file_path_dict):
 
             # Create new folder of samples
             mask_number = 1
-            folder_name = movie + "_" + str(finished_movie_count)
+            folder_name = movie + "_" + str(movie_folder_count)
+            movie_folder_count += 1
             capture_save_path = os.path.join("MovieDataset", "Test", "videos", folder_name)
             mask_save_path = os.path.join("MovieDataset", "Test", "masks", "test_object_like", "object_like_" + str(mask_folder_count) + "_"+ str(mask_folder_count))
             if not os.path.exists(capture_save_path):
@@ -466,7 +468,7 @@ def Inference_Extract_Video_info(args, movie, video_file):
     count = 1    
     global mask_folder_count
     pbar = tqdm(total = total_frames)
-    
+    moviv_folders_count = 0
     # Create Capture of Video
     folder_name_list = list()
     t1 = t.time()
@@ -475,7 +477,8 @@ def Inference_Extract_Video_info(args, movie, video_file):
         
         if break_point_list[break_point_idx+1] - break_point_list[break_point_idx] > frame_gap*sample_num:
             # Create Samples folder
-            folder_name = movie + "_" + str(finished_movie_count)
+            folder_name = movie + "_" + str(movie_folder_count)
+            movie_folder_count += 1
             folder_name_list.append(folder_name)
             capture_save_path = os.path.join("MovieDataset", "Test", "videos", folder_name)
             if not os.path.exists(capture_save_path):
