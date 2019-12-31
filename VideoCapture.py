@@ -468,7 +468,7 @@ def Inference_Extract_Video_info(args, movie, video_file):
     count = 1    
     global mask_folder_count
     pbar = tqdm(total = total_frames)
-    moviv_folders_count = 0
+    movie_folder_count = 0
     # Create Capture of Video
     folder_name_list = list()
     t1 = t.time()
