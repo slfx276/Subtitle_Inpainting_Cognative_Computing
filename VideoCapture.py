@@ -381,7 +381,7 @@ def Extract_Video_info(args, movie, video_file, subtitle_file_path_dict):
 
             # Create new folder of samples
             mask_number = 1
-            folder_name = randomString() + "_" + str(finished_movie_count)
+            folder_name = movie + "_" + str(finished_movie_count)
             capture_save_path = os.path.join("MovieDataset", "Test", "videos", folder_name)
             mask_save_path = os.path.join("MovieDataset", "Test", "masks", "test_object_like", "object_like_" + str(mask_folder_count) + "_"+ str(mask_folder_count))
             if not os.path.exists(capture_save_path):
@@ -390,6 +390,7 @@ def Extract_Video_info(args, movie, video_file, subtitle_file_path_dict):
             
             if not os.path.exists(mask_save_path):
                 os.makedirs(mask_save_path)
+            
             
             mask_folder_count += 1
             logger.debug(f"Hit Subtitle Frame! frame number = {count}")
@@ -474,7 +475,7 @@ def Inference_Extract_Video_info(args, movie, video_file):
         
         if break_point_list[break_point_idx+1] - break_point_list[break_point_idx] > frame_gap*sample_num:
             # Create Samples folder
-            folder_name = randomString() + "_" + str(finished_movie_count)
+            folder_name = movie + "_" + str(finished_movie_count)
             folder_name_list.append(folder_name)
             capture_save_path = os.path.join("MovieDataset", "Test", "videos", folder_name)
             if not os.path.exists(capture_save_path):
@@ -537,6 +538,8 @@ def Process_Movie(args, subtitle_file_path_dict, movie_list, Inference = True):
 
 
 if __name__ == "__main__":
+    
+    start_time = t.time()
     args = get_parser()
     logger = Create_Logger(logging.INFO)
 
@@ -569,6 +572,7 @@ if __name__ == "__main__":
     # Parse subtitle text file content
     Process_Movie(args, subtitle_file_path_dict, movie_list, Inference=Inference)
 
+    logger.info(f"Preprocessing elapsed time {t.time()-start_time}")
     
     
 
