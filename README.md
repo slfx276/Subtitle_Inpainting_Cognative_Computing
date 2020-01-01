@@ -3,7 +3,7 @@
 ## Purpose  
 The purpose of this project is to remove the subtitles of input video.  
 
-- First, we need to detect breakpoint of different scenes, because the inpainting scheme would utilize temporal information. We should not confuse them with siginificantly different frames. And [PySceneDetect-0.5.1.1](https://github.com/Breakthrough/PySceneDetect/) is used in this scene detection task.  
+- First, we need to detect breakpoint of different scenes, because the inpainting scheme would utilize temporal information. We should not confuse them with significantly different frames. And [PySceneDetect-0.5.1.1](https://github.com/Breakthrough/PySceneDetect/) is used in this scene detection task.  
 
 - Second, we have to detect the regions of subtitle, and make subtitle masks corresponding to the images in order to offer a reference of inpainting region to inpainting model. We use ["Character Region Awareness for Text Detection"](https://github.com/clovaai/CRAFT-pytorch) for this task.
 
