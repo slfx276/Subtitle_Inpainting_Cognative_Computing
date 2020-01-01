@@ -40,7 +40,7 @@ $ conda activate videoPreprocessing
 
 
 ## Notification  
-- This code is executed in Win10, it may occur some errors in other OSs. Especially I use windows internal font type in function Make_masks( ) QQ  
+- This code is executed in Win10, it may occur some errors in other OSs. Especially I use windows internal font type in function Make_masks( ) QQ . And if languages of .srt files are not English or Chinese, I don't really know whether it would cause some errors like *UnicodeDecodeError*.  
 - If the resizing image size is too small, it would affect text detection result.  
 - If your video have **no internal subtitle** instead of only a .srt file, than using inference command is wasting time.  
 Because it won't create any meaningful mask of subtitles, instead of white image and some masks of frames which have text content(not subtitles).  
