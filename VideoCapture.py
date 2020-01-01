@@ -315,36 +315,42 @@ def Extract_Video_info(args, movie, video_file, subtitle_file_path_dict):
     frame_subtitle_dict = dict()
 
     # read subtitle file of this movie
-    with open(subtitle_file_path_dict[movie], "r", encoding="utf-8") as f:
-        mapping = f.readlines()
+    try:
+        with open(subtitle_file_path_dict[movie], "r", encoding="utf-8") as f:
+            mapping = f.readlines()
+    except UnicodeDecodeError:
+        logger.error("UnicodeDecodeError in line 322 !!!")
+        print("Read File : ", subtitle_file_path_dict[movie])
+        with open(subtitle_file_path_dict[movie], "r", encoding ="ISO-8859-1") as f:
+            mapping = f.readlines()
 
-        for idx in range(len(mapping)):
-            if len(mapping[idx].split("-->")) == 2:
-                time_token_idx.append(idx)
-                logger.debug(mapping[idx])
+    for idx in range(len(mapping)):
+        if len(mapping[idx].split("-->")) == 2:
+            time_token_idx.append(idx)
+            logger.debug(mapping[idx])
 
-        for idx in tqdm(range(len(time_token_idx))):
-            # calculate the start frame and ending frame of subtitle 
-            time = mapping[time_token_idx[idx]][:8]
-            end_time = mapping[time_token_idx[idx]].split("--> ")[1][:8]
-            hour, minute, second = int(time[:2]), int(time[3:5]), int(time[6:])
-            end_hour, end_minute, end_second = int(end_time[:2]), int(end_time[3:5]), int(end_time[6:])
-            # calculate frame number with subtitle
-            frame_number = ((hour * 60 + minute) * 60 + second) * round(fps)
-            end_frame_number = ((end_hour * 60 + end_minute) * 60 + end_second) * round(fps)
+    for idx in tqdm(range(len(time_token_idx))):
+        # calculate the start frame and ending frame of subtitle 
+        time = mapping[time_token_idx[idx]][:8]
+        end_time = mapping[time_token_idx[idx]].split("--> ")[1][:8]
+        hour, minute, second = int(time[:2]), int(time[3:5]), int(time[6:])
+        end_hour, end_minute, end_second = int(end_time[:2]), int(end_time[3:5]), int(end_time[6:])
+        # calculate frame number with subtitle
+        frame_number = ((hour * 60 + minute) * 60 + second) * round(fps)
+        end_frame_number = ((end_hour * 60 + end_minute) * 60 + end_second) * round(fps)
 
-            frameIdx_with_sub.append(frame_number)
-            end_frameIdx_with_sub.append(end_frame_number)
-            logger.debug(f"Frame Number-> {frame_number}, {end_frame_number}")
+        frameIdx_with_sub.append(frame_number)
+        end_frameIdx_with_sub.append(end_frame_number)
+        logger.debug(f"Frame Number-> {frame_number}, {end_frame_number}")
 
-            subtitle = mapping[time_token_idx[idx] + 1].strip("\n \t</i>")
-            # if subtitle cost 2 rows
-            if idx != len(time_token_idx)-1 and time_token_idx[idx] + 3 != time_token_idx[idx + 1]:
-                subtitle = subtitle + " " + mapping[time_token_idx[idx] + 2].strip("\n \t</i>")
-            for frame in range(frame_number, end_frame_number+1):
-                frame_subtitle_dict[frame] = subtitle
+        subtitle = mapping[time_token_idx[idx] + 1].strip("\n \t</i>")
+        # if subtitle cost 2 rows
+        if idx != len(time_token_idx)-1 and time_token_idx[idx] + 3 != time_token_idx[idx + 1]:
+            subtitle = subtitle + " " + mapping[time_token_idx[idx] + 2].strip("\n \t</i>")
+        for frame in range(frame_number, end_frame_number+1):
+            frame_subtitle_dict[frame] = subtitle
 
-            logger.debug(frame_number, end_frame_number, subtitle)
+        logger.debug(frame_number, end_frame_number, subtitle)
         
     logger.debug("There are {} frames need to be extracted.".format(len(frameIdx_with_sub)))
     logger.debug(frameIdx_with_sub, frame_subtitle_dict)
@@ -468,7 +474,7 @@ def Inference_Extract_Video_info(args, movie, video_file):
     count = 1    
     global mask_folder_count
     pbar = tqdm(total = total_frames)
-    movie_folder_count = 0
+    moviv_folders_count = 0
     # Create Capture of Video
     folder_name_list = list()
     t1 = t.time()
