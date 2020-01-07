@@ -165,7 +165,7 @@ def Make_masks(mask_save_path, text_content, img_size=(128,128), show = False, c
     else:
         draw.text((img_size[1]//2-len(text_content)*4//2, img_size[0]-20), text_content, font=font, fill=color)
     
-    img.save(mask_save_path)
+    img.save(mask_save_path) # transform to grayscale image
 
     
     if show:
@@ -411,11 +411,16 @@ def Extract_Video_info(args, movie, video_file, subtitle_file_path_dict):
                     
                 #  Create Mask
                     if count in frame_subtitle_dict.keys():
-                        Make_masks(os.path.join(mask_save_path, "mask_"+ str(i//frame_gap) + ".jpg")
-                                        , frame_subtitle_dict[count])
+                        # Make_masks(os.path.join(mask_save_path, "mask_"+ str(i//frame_gap) + ".jpg")
+                        #                 , frame_subtitle_dict[count], img_size = image_resize)
+                        Make_masks(os.path.join(mask_save_path, "mask_"+ str(i//frame_gap) + ".png")
+                                        , frame_subtitle_dict[count], img_size = image_resize)
                     else:
-                        Make_masks(os.path.join(mask_save_path, "mask_"+ str(i//frame_gap) + ".jpg")
-                                        , "", frame_has_no_sub=True)
+                        # Make_masks(os.path.join(mask_save_path, "mask_"+ str(i//frame_gap) + ".jpg")
+                        #                 , "", frame_has_no_sub=True, img_size = image_resize)
+                        Make_masks(os.path.join(mask_save_path, "mask_"+ str(i//frame_gap) + ".png")
+                                        , "", frame_has_no_sub=True, img_size = image_resize)
+
                     mask_number += 1
                 rval, frame = video.read()
                 count = count + 1
@@ -474,7 +479,7 @@ def Inference_Extract_Video_info(args, movie, video_file):
     count = 1    
     global mask_folder_count
     pbar = tqdm(total = total_frames)
-    moviv_folders_count = 0
+    movie_folder_count = 0
     # Create Capture of Video
     folder_name_list = list()
     t1 = t.time()
@@ -494,8 +499,9 @@ def Inference_Extract_Video_info(args, movie, video_file):
                 if (frame_number - break_point_list[break_point_idx]) % frame_gap == 0:
                     img_path = os.path.join(capture_save_path, folder_name + "_" + str((frame_number - break_point_list[break_point_idx])//frame_gap) + ".jpg")
                     frame = cv2.resize(frame, (image_resize[1], image_resize[0]))
-                    logger.debug(f"save-> {frame_number} , at-> {img_path}")
+                    
                     cv2.imwrite(img_path, frame)
+                    print(f"save_capture: {img_path}, capture_save_path = {capture_save_path}")
 
                 rval, frame = video.read()
                 count = count + 1
